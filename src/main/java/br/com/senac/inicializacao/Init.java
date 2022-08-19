@@ -39,6 +39,14 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		for(Aluno aluno: listaAlunos) {
 			System.out.println(aluno.getNome());
 		}
+		
+		Aluno aluno4 = alunoService.buscarPorId(1);
+		
+		System.out.println(aluno4.getNome());
+		
+		//repo.saveAll(Arrays.asList(aluno1,aluno2,aluno3));
+		alunoService.excluir(2);
+		
 	}
 	
 	
