@@ -45,10 +45,16 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		System.out.println(aluno4.getNome());
 		
 		//repo.saveAll(Arrays.asList(aluno1,aluno2,aluno3));
-		alunoService.excluir(2);
+		//alunoService.excluir(2);
 		
-	}
-	
-	
+		Aluno alunoAlterado = new Aluno();
+        alunoAlterado.setId(1);
+        alunoAlterado.setNome("Lucas Silva");
 
+        alunoService.salvarAlteracao(alunoAlterado);
+
+    }
 }
+// Turma
+// Professor
+// Curso
