@@ -12,32 +12,34 @@ import br.com.senac.repository.TurmaRepository;
 
 @Service
 public class TurmaService {
-
-    @Autowired
-    TurmaRepository repo;
-
-    public List<Turma> buscarTodosTurmas(){
-        return repo.findAll();
+	
+	@Autowired
+	private TurmaRepository turmaRepository;
+	
+	//Cadastrar 
+	public Turma salvar(Turma turma) {
+		return turmaRepository.save(turma);
+	}
+	//Buscar todos 
+	public List<Turma> buscarTodasTurmas(){
+		return turmaRepository.findAll();
+	}
+	//Buscar 
+	public Turma buscarPorId(Integer id) throws ObjectNotFoundException{
+		Optional<Turma> turma = turmaRepository.findById(id);
+		return turma.orElseThrow(() -> new ObjectNotFoundException(1L, "turma não encontrado"));
+	}
+	//Deletar 
+	public void deletarPorId(Integer id) {
+        Optional<Turma> turma = turmaRepository.findById(id);
+        turmaRepository.deleteById(id);
     }
-
-    public Turma salvar(Turma turma){
-        return repo.save(turma);
-    }
-
-    public Turma buscarTurmaId(Integer id) throws ObjectNotFoundException{
-        Optional<Turma> turma = repo.findById(id);
-
-        return turma.orElseThrow( () -> new ObjectNotFoundException(1L, "Turma não encontrado"));
-    }
-
-    public void deletarTurmaId(Integer id){
-        repo.deleteById(id);
-    }
-
-    public Turma salvarAlteracao(Turma turmaAlterado){
-        Turma turma = this.buscarTurmaId(turmaAlterado.getId());
-        turma.setNome(turmaAlterado.getNome());
-        return salvar(turma);
-    }
-
+	
+	//Atualizar 
+	public Turma salvarAlteracao(Turma turmaAlterada) {
+		Turma turma = buscarPorId(turmaAlterada.getId());
+		turma.setNome(turmaAlterada.getNome());
+		return salvar(turma);
+	}
+	
 }

@@ -2,38 +2,39 @@ package br.com.senac.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Aluno implements Serializable{
+public class Aluno implements Serializable {
 
-    private static final long serialVersionUID = 5963010407968573626L;
+	private static final long serialVersionUID = 1L;
 
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	private String nome;
 
-    private String nome;
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getId() {
-        return Id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setId(Integer id) {
-        Id = id;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-
-}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	
+}	

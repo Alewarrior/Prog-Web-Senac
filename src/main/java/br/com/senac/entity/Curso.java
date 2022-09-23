@@ -1,33 +1,39 @@
 package br.com.senac.entity;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.persistence.Id;
 
 @Entity
 public class Curso {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column
+	private String nome;
+	
+	
+	//private List<Aluno> aluno;
+	
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+	public Integer getId() {
+		return id;
+	}
 
-    private String nome;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId() {
-        return Id;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setId(Integer id) {
-        Id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }

@@ -10,35 +10,36 @@ import org.springframework.stereotype.Service;
 import br.com.senac.entity.Aluno;
 import br.com.senac.repository.AlunoRepository;
 
-
-
 @Service
 public class AlunoService {
 
-    @Autowired
-    AlunoRepository repo;
-
-    public List<Aluno> buscarTodosAlunos(){
-        return repo.findAll();
+	@Autowired
+	private AlunoRepository alunoRepository;
+	
+	//Cadastrar 
+	public Aluno salvar(Aluno aluno) {
+		return alunoRepository.save(aluno);
+	}
+	//Buscar todos 
+	public List<Aluno> buscarTodosAlunos(){
+		return alunoRepository.findAll();
+	}
+	//Buscar
+	public Aluno buscarPorId(Integer id) throws ObjectNotFoundException{
+		Optional<Aluno> aluno = alunoRepository.findById(id);
+		return aluno.orElseThrow(() -> new ObjectNotFoundException(1L, "Aluno não encontrado"));
+	}
+	//Deletar 
+	public void deletarPorId(Integer id) {
+        //Optional<Aluno> aluno = alunoRepository.findById(id);
+        alunoRepository.deleteById(id);
     }
-
-    public Aluno salvar(Aluno aluno){
-        return repo.save(aluno);
-    }
-
-    public Aluno buscarAlunoId(Integer id) throws ObjectNotFoundException{
-        Optional<Aluno> aluno = repo.findById(id);
-
-        return aluno.orElseThrow( () -> new ObjectNotFoundException(1L, "Aluno não encontrado"));
-    }
-
-    public void deletarAlunoId(Integer id){
-        repo.deleteById(id);
-    }
-
-    public Aluno salvarAlteracao(Aluno alunoAlterado){
-        Aluno aluno = this.buscarAlunoId(alunoAlterado.getId());
-        aluno.setNome(alunoAlterado.getNome());
-        return salvar(aluno);
-    }
+	
+	//Atualizar
+	public Aluno salvarAlteracao(Aluno alunoAlterado) {
+		Aluno aluno = buscarPorId(alunoAlterado.getId());
+		aluno.setNome(alunoAlterado.getNome());
+		return salvar(aluno);
+	}
+		
 }
